@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LinuxGuard: Linux permission risk scanner</title><meta name="description" content="Scan folders, rank files by importance, and fix Linux permissions safely with preview and undo."><meta name="theme-color" content="#070b12"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap"><style>
+body{margin:0;background:#070b12}
+*{box-sizing:border-box}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.nav{position:sticky;top:0;z-index:20;background:rgba(7,11,18,.82);backdrop-filter:blur(12px);border-bottom:1px solid #162233}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:#0d141e;border:1px solid #1f2d3f;border-radius:16px;padding:26px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:#2f6b4f}
+.btn{display:inline-block;padding:14px 22px;border-radius:10px;font-weight:700;text-decoration:none;font-size:16px;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+a.p{background:#35e58a;color:#06130c}a.p:hover{background:#6af0ac}
+a.s{border:1px solid #2b3d52;color:#edf4ff}a.s:hover{border-color:#35e58a}
+a.l{color:#9fb1c8;text-decoration:none;margin-left:28px;font-size:15px}a.l:hover{color:#fff}
+.pill{display:inline-block;border:1px solid #243449;background:#0b121b;color:#b9c8dc;border-radius:999px;padding:7px 14px;font-size:13px;margin:0 8px 8px 0}
+.b{display:inline-block;width:78px;text-align:center;padding:4px 0;border-radius:6px;font-size:11px;font-weight:700}
+.tag{font-family:'JetBrains Mono',monospace;color:#35e58a;font-size:12px;letter-spacing:1px}
+.step{position:relative}
+.step b.n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#35e58a;color:#06130c;font-size:15px}
+details{border-bottom:1px solid #1f2d3f;padding:18px 0}
+summary{cursor:pointer;font-size:18px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:#35e58a;font-size:22px}
+details[open] summary::after{content:"\2212"}
+details p{margin:12px 0 0;color:#9fb1c8;line-height:1.7;max-width:760px}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(#142033 1px,transparent 1px),linear-gradient(90deg,#142033 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 0,transparent 68%);mask-image:radial-gradient(ellipse at 70% 30%,#000 0,transparent 68%);opacity:.55;pointer-events:none}
+a:focus-visible,summary:focus-visible{outline:2px solid #54a8ff;outline-offset:3px}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.card{transition:none}}
+@media(max-width:900px){.hero,.g2,.g3{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}a.l{display:none}h1{font-size:40px!important}}
+</style></head><body><div style="background:#070b12;color:#edf4ff;font-family:'Space Grotesk',system-ui,sans-serif;min-height:100%">
+
+<div class="nav"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding-top:16px;padding-bottom:16px">
+<div style="display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px"><div style="width:34px;height:34px;border-radius:9px;background:#35e58a;color:#06130c;display:grid;place-items:center;font-size:14px">LG</div>LinuxGuard</div>
+<div><a class="l" href="#features">Features</a><a class="l" href="#flow">How it works</a><a class="l" href="#security">Security</a><a class="l" href="#faq">FAQ</a><a class="btn p" href="#get" style="margin-left:28px;padding:10px 18px;font-size:14px">Get the app</a></div>
+</div></div>
+
+<div style="position:relative;overflow:hidden"><div class="grid-bg"></div>
+<div class="wrap hero" style="position:relative;padding-top:72px;padding-bottom:96px">
+<div>
+<div class="tag" style="text-transform:uppercase;letter-spacing:2px;font-size:13px">Linux permission risk scanner</div>
+<h1 style="font-size:60px;line-height:1.04;margin:16px 0 20px;font-weight:700;letter-spacing:-1.5px">Find the files that are one chmod away from a breach.</h1>
+<p style="color:#9fb1c8;font-size:19px;line-height:1.65;margin:0 0 28px;max-width:540px">LinuxGuard scans real folders, ranks every file by how much it matters, explains each risk in plain English, and fixes permissions safely with a preview and one-click undo.</p>
+<div style="margin-bottom:26px"><a class="btn p" href="#get">Run it in 2 minutes</a> <a class="btn s" href="app.html" style="margin-left:10px">Try the web demo</a></div>
+<div><span class="pill">Local only</span><span class="pill">No dependencies</span><span class="pill">Open source (MIT)</span><span class="pill">9 automated tests</span></div>
+</div>
+<div class="card" style="padding:0;overflow:hidden;box-shadow:0 30px 80px #000a">
+<div style="padding:12px 16px;border-bottom:1px solid #1f2d3f;color:#7d8fa8;font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;gap:7px;align-items:center"><i style="width:10px;height:10px;border-radius:50%;background:#ff5c6c"></i><i style="width:10px;height:10px;border-radius:50%;background:#ffd166"></i><i style="width:10px;height:10px;border-radius:50%;background:#35e58a"></i><span style="margin-left:10px">linuxguard scan /var/www</span></div>
+<div style="padding:18px 16px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+<div><span class="b" style="background:#3a151b;color:#ff7c89">CRITICAL</span> <span>id_rsa</span> <span style="color:#7d8fa8">644 → 600</span></div>
+<div><span class="b" style="background:#3a151b;color:#ff7c89">CRITICAL</span> <span>.env</span> <span style="color:#7d8fa8">664 → 600</span></div>
+<div><span class="b" style="background:#3a151b;color:#ff7c89">HIGH</span> <span>backup (SUID)</span> <span style="color:#7d8fa8">4755 → 755</span></div>
+<div><span class="b" style="background:#392f13;color:#ffd76b">MEDIUM</span> <span>deploy.sh</span> <span style="color:#7d8fa8">777 → 755</span></div>
+<div><span class="b" style="background:#123a29;color:#69f0a8">OK</span> <span>notes.txt</span> <span style="color:#7d8fa8">644</span></div>
+<div style="margin-top:8px;padding:10px 12px;background:#0a1118;border-radius:8px;color:#35e58a">chmod 600 -- id_rsa .env &amp;&amp; chmod 755 -- backup deploy.sh</div>
+</div></div>
+</div></div>
+
+<div style="border-top:1px solid #1f2d3f;border-bottom:1px solid #1f2d3f;background:#0a1018">
+<div class="wrap g4" style="padding-top:34px;padding-bottom:34px">
+<div><div style="font-size:34px;font-weight:700;color:#35e58a">127.0.0.1</div><div style="color:#9fb1c8;font-size:14px">Runs only on your machine</div></div>
+<div><div style="font-size:34px;font-weight:700;color:#35e58a">0 bytes</div><div style="color:#9fb1c8;font-size:14px">of file contents leave your device</div></div>
+<div><div style="font-size:34px;font-weight:700;color:#35e58a">5,000</div><div style="color:#9fb1c8;font-size:14px">entries per scan, 8 levels deep</div></div>
+<div><div style="font-size:34px;font-weight:700;color:#35e58a">1 click</div><div style="color:#9fb1c8;font-size:14px">to undo any applied change</div></div>
+</div></div>
+
+<div class="wrap" style="padding-top:96px;padding-bottom:20px">
+<div class="tag">BEFORE AND AFTER</div>
+<h2 style="font-size:40px;margin:10px 0 12px;letter-spacing:-1px">From a wall of ls -l to a clear answer</h2>
+<p style="color:#9fb1c8;font-size:18px;margin:0 0 36px;max-width:640px">The same folder, read two ways.</p>
+<div class="g2">
+<div class="card" style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9;color:#7d8fa8;overflow-x:auto;white-space:nowrap"><div style="color:#9fb1c8;margin-bottom:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px">ls -l</div>-rw-r--r-- 1 me me 1675 Oct 12 id_rsa<br>-rw-rw-r-- 1 me me 64 Oct 12 .env<br>-rwsr-xr-x 1 root root 22 Oct 12 backup<br>-rwxrwxrwx 1 me me 27 Oct 12 deploy.sh<br>-rw-r--r-- 1 me me 14 Oct 12 notes.txt<br>drwxrwxrwx 2 me me 4096 Oct 12 uploads</div>
+<div class="card"><div style="color:#35e58a;margin-bottom:10px;font-weight:700;font-size:15px">LinuxGuard</div>
+<div style="line-height:1.9;font-size:15px"><b>id_rsa</b> is a private key that other users can read. <span style="color:#9fb1c8">Set it to 600.</span><br><b>backup</b> runs as root because of SUID. <span style="color:#9fb1c8">Remove the bit unless needed.</span><br><b>deploy.sh</b> and <b>uploads</b> are writable by everyone. <span style="color:#9fb1c8">Any user could change them.</span></div></div>
+</div></div>
+
+<div id="features" class="wrap" style="padding-top:80px;padding-bottom:20px">
+<div class="tag">FEATURES</div>
+<h2 style="font-size:40px;margin:10px 0 36px;letter-spacing:-1px">Everything you need to lock a folder down</h2>
+<div class="g3">
+<div class="card"><div class="tag">01</div><h3 style="margin:8px 0;font-size:20px">Live folder scan</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Point it at any folder. It reads names and permissions, and never follows symlinks.</p></div>
+<div class="card"><div class="tag">02</div><h3 style="margin:8px 0;font-size:20px">Scan any file type</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Detects the real file type, hidden secrets and executables disguised as images.</p></div>
+<div class="card"><div class="tag">03</div><h3 style="margin:8px 0;font-size:20px">Importance ranking</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Keys and credentials first, logs and media last, so you fix what matters most.</p></div>
+<div class="card"><div class="tag">04</div><h3 style="margin:8px 0;font-size:20px">Apply with undo</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Preview, confirm, apply. A restore point is saved so you can roll back instantly.</p></div>
+<div class="card"><div class="tag">05</div><h3 style="margin:8px 0;font-size:20px">Drift watch</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Save a baseline and see new, changed and removed files when permissions move.</p></div>
+<div class="card"><div class="tag">06</div><h3 style="margin:8px 0;font-size:20px">Misconfiguration checks</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Flags exposed .git folders, backup leftovers, open Docker sockets and risky SSH or sudo settings.</p></div>
+</div></div>
+<div class="wrap" style="padding-top:80px;padding-bottom:20px"><div class="tag">SEE IT</div><h2 style="font-size:40px;margin:10px 0 36px;letter-spacing:-1px">The app in action</h2><div class="g2">
+<div class="card" style="padding:12px"><img loading="lazy" src="screenshots/scanner.png" alt="Scanner with risk score and findings" style="width:100%;border-radius:10px;display:block"><p style="margin:12px 6px 4px;color:#9fb1c8">Risk score and ranked findings</p></div>
+<div class="card" style="padding:12px"><img loading="lazy" src="screenshots/apply-preview.png" alt="Preview of permission changes" style="width:100%;border-radius:10px;display:block"><p style="margin:12px 6px 4px;color:#9fb1c8">Preview every change before it happens</p></div>
+<div class="card" style="padding:12px"><img loading="lazy" src="screenshots/quick-fix.png" alt="Quick Fix importance ranking" style="width:100%;border-radius:10px;display:block"><p style="margin:12px 6px 4px;color:#9fb1c8">Files ranked by importance with short commands</p></div>
+<div class="card" style="padding:12px"><img loading="lazy" src="screenshots/assistant.png" alt="Offline permission assistant" style="width:100%;border-radius:10px;display:block"><p style="margin:12px 6px 4px;color:#9fb1c8">Offline assistant for permissions and security basics</p></div>
+</div></div>
+
+<div id="flow" class="wrap" style="padding-top:80px;padding-bottom:20px">
+<div class="tag">HOW IT WORKS</div>
+<h2 style="font-size:40px;margin:10px 0 36px;letter-spacing:-1px">From scan to verified fix in four steps</h2>
+<div class="g4">
+<div class="card step"><b class="n">1</b><h3 style="margin:14px 0 8px;font-size:19px">Scan</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Enter a path. Risks are scored and sorted from critical to routine.</p></div>
+<div class="card step"><b class="n">2</b><h3 style="margin:14px 0 8px;font-size:19px">Understand</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Open a finding to see why it matters, in plain English.</p></div>
+<div class="card step"><b class="n">3</b><h3 style="margin:14px 0 8px;font-size:19px">Preview and apply</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Review the exact before and after, then confirm. Nothing changes before that.</p></div>
+<div class="card step"><b class="n">4</b><h3 style="margin:14px 0 8px;font-size:19px">Undo or watch</h3><p style="margin:0;color:#9fb1c8;line-height:1.6">Roll back in one click, or use drift watch to keep it fixed.</p></div>
+</div></div>
+
+<div id="security" class="wrap" style="padding-top:80px;padding-bottom:20px">
+<div class="card" style="padding:44px">
+<div class="tag">SECURITY</div>
+<h2 style="font-size:36px;margin:10px 0 12px;letter-spacing:-1px">Built so the scanner is not the risk</h2>
+<p style="color:#9fb1c8;font-size:17px;margin:0 0 28px;max-width:660px">A security tool should be held to a higher standard. Every control below is covered by an automated test.</p>
+<div class="g3" style="gap:28px">
+<div><b style="color:#35e58a">Local only</b><p style="margin:6px 0 0;color:#9fb1c8;line-height:1.6">Listens on 127.0.0.1 with a secret token, host and origin checks, and a strict content policy.</p></div>
+<div><b style="color:#35e58a">Refuses dangerous modes</b><p style="margin:6px 0 0;color:#9fb1c8;line-height:1.6">SUID, SGID, sticky and world-writable permissions can never be applied.</p></div>
+<div><b style="color:#35e58a">Race-free changes</b><p style="margin:6px 0 0;color:#9fb1c8;line-height:1.6">Changes use open file descriptors, so a path swapped for a symlink mid-apply cannot redirect them.</p></div>
+</div></div></div>
+
+<div id="faq" class="wrap" style="padding-top:80px;padding-bottom:20px;max-width:900px">
+<div class="tag">FAQ</div>
+<h2 style="font-size:40px;margin:10px 0 24px;letter-spacing:-1px">Questions people ask</h2>
+<details><summary>Does it upload my files?</summary><p>No. The app runs on your computer and talks to nothing on the internet. File contents are only sampled locally to detect type and secrets, and are never stored or sent.</p></details>
+<details><summary>Can it break my system?</summary><p>It only changes permissions after a preview and your confirmation, it refuses dangerous modes such as SUID or world-writable, and every apply saves a restore point you can undo.</p></details>
+<details><summary>Does it work on Windows?</summary><p>It runs, but Windows does not store Linux permissions, so results there are approximate and Apply is disabled. A helper script runs it inside WSL for real results.</p></details>
+<details><summary>Does it use AI?</summary><p>The desktop app is rule-based and works fully offline. The built-in assistant matches your question to prepared answers and tolerates typos, but it is not a language model.</p></details>
+<details><summary>What does it not do?</summary><p>It audits permissions, file content signals and common misconfigurations. It does not find software vulnerabilities, malware signatures or network exposure.</p></details>
+<details><summary>Is it free?</summary><p>Yes. LinuxGuard is open source under the MIT license, for educational and defensive use on systems you own or are authorized to assess.</p></details>
+</div>
+
+<div id="get" class="wrap" style="padding-top:88px;padding-bottom:96px;text-align:center">
+<h2 style="font-size:44px;margin:0 0 14px;letter-spacing:-1px">Run it in two minutes</h2>
+<p style="color:#9fb1c8;font-size:18px;margin:0 0 28px">Python 3.8+ is all you need. No packages to install.</p>
+<div style="display:inline-block;text-align:left;background:#0d141e;border:1px solid #1f2d3f;border-radius:12px;padding:18px 26px;font-family:'JetBrains Mono',monospace;font-size:15px;color:#35e58a;line-height:1.9">$ git clone https://github.com/YOUR-USERNAME/linuxguard<br>$ cd linuxguard<br>$ python3 linuxguard.py</div>
+<div style="margin-top:32px"><a class="btn p" href="https://github.com/YOUR-USERNAME/linuxguard/releases/latest">Download</a> <a class="btn s" href="app.html" style="margin-left:10px">Try the web demo</a></div>
+</div>
+<div style="border-top:1px solid #1f2d3f;padding:28px 0;text-align:center;color:#7d8fa8;font-size:14px">LinuxGuard &middot; Linux permission risk scanner &middot; for educational use &middot; <a href="https://github.com/YOUR-USERNAME/linuxguard" style="color:#35e58a">GitHub</a></div>
+</div>
+</body></html>

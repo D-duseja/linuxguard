@@ -1,0 +1,7 @@
+DEMO KE STEPS (3-4 minute)
+1. bash demo-setup.sh            -> risky demo folder banata hai (Linux/WSL)
+2. App chalao, Live Scan mein path daalo: ~/linuxguard-demo, "3 levels deep"
+3. Scanner mein dekho: id_rsa, .env, backup (SUID), deploy.sh, uploads (777)
+4. Quick Fix tab: demo-data ki files upload karke importance ranking dikhao
+5. Findings mein "Select all fixes" -> Preview -> Apply -> phir "Undo last apply"
+6. Live Scan -> Save baseline, kuch chmod karo, "Compare now" -> drift dikhega
